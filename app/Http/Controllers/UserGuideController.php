@@ -13,14 +13,11 @@ class UserGuideController extends Controller
 {
     public function index()
     {
-        $guides = DB::table('userguides')->orderBy('id', 'desc')->take(4)->get();
+        $guides = DB::table('userguides')->orderBy('id', 'desc')->take(4)->get()->all();
+
         return view ('user_guide.index', compact('guides'));
     }
-    // public function create()
-    // {
-
-    //     return view ('user_guide.index', compact('user'));
-    // }
+   
     public function store(Request $request)
     {
 
@@ -41,18 +38,49 @@ class UserGuideController extends Controller
     		 'description' => $request->description,
     	);
     	DB::table('userguides')->insert($user_guide);
-        return view ('user_guide.index');
+        Session::flash('message', 'User Guide Created.');
+
+        return redirect('/userguide');
     }
-    public function edit($id)
-    {
-    	dd('sdfdsfsad');
-        return view ('user_guide.index', compact('user'));
-    }
+    
     public function update(Request $request)
     {
-    	dd('sdfdsfsad');
-        return view ('user_guide.index', compact('user'));
+
+        $userguide = DB::table('userguides')->where('id', $request->guide)->get()->first();
+
+        if ($files = $request->file('image')) 
+        {
+
+            $path="assets/img/upload/$userguide->image";
+
+            @unlink($path);
+
+            $name=$files->getClientOriginalName();
+
+            $image = time().'.'.$request->image->getClientOriginalExtension();
+
+            $request->image->move(public_path() .'/assets/img/upload', $image);
+
+           }
+
+        else
+        {
+
+            $image = $userguide->image;
+
+        }
+        DB::table('userguides')->where('id', $request->guide)->update([
+
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'image' => $image,
+            ]);
+
+        Session::flash('message', 'User Guide Updated.');
+
+        return redirect('/userguide');
     }
+
     public function destroy(Request $request)
     {
     	dd('sdfdsfsad');

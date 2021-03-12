@@ -2680,6 +2680,8 @@
 
   color: #585858 !important;
 
+  width: 100%;
+
 }
 
 
@@ -3958,15 +3960,20 @@
 
 .yes_no_radio_button button {
   position: relative;
-      padding: 7px 19px;
+    padding: 7px 19px;
     margin-top: 0;
     
+}
+.t_f_btn , .unique_btn , .inst_quiz , .multi_select_btn {
+    padding: 7px 19px;
+  position: relative;
 }
 .yes_no_radio_button button.active {
   background: #3366cc;
 }
 .yes_no_radio_button button input , .cr_btn button input , .true_false_btns button input , 
-.parent_input input , .gender_buttons button input , .diabities_buttons button input , .week_btn input {
+.parent_input input , .gender_buttons button input , .diabities_buttons button input , .week_btn input ,
+.t_f_btn input , .unique_btn input , .inst_quiz input , .multi_select_btn input {
   position: absolute;
     width: 100%;
     top: 1px;
@@ -4081,11 +4088,12 @@
 }
 .member span {
     font-size: 15px;
-    padding-bottom: 10px;
+    padding-bottom: 2px;
     align-items: baseline;
     position: relative;
     font-weight: 500;
     color: grey;
+    padding-top: 10px;
     display: flex;
     margin: 0 auto;
     padding-left: 65px;
@@ -4128,41 +4136,135 @@
   padding: 10px 18px;
 }
 
-.result_box {
-    padding: 3rem;
-    border: 1px solid #3399ff;
-    margin: 2rem auto;
-    width: 50%;
-    border-radius: 6px;
-    background: url(../img/result.jpg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-    z-index: 0;
-    overflow: hidden;
+.align_stu {
+  display: flex;
+  justify-content: space-between;
 }
 
-.result_box:before {
-    background-color: rgb(51 102 204 / 79%);
+.upload_stu {
+  border: 1px solid #ddd;
+  padding: 0px 12px;
+  border-radius: 4px;
+}
+
+.show_detail_tags h5 , .show_detail_tags p {
+   font-weight: 400;
+}
+
+.show_detail_tags h5 span , .show_detail_tags p span {
+  font-weight: 600;
+}
+
+.member-info p.make_circle {
+    background: #3162c3;
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.parent_collapse .panel-body {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.parent_collapse > .collapse {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.second_heading_scale {
+  padding: 15px;
+  width: 100%;
+}
+
+.second_heading_scale h3 {
+  margin-bottom: 0;
+}
+.second_heading_scale p {
+  font-size: 12px;
+  color: red;
+  font-weight: 400;
+}
+
+.color-picker input {
+  width: 8% !important;
+}
+
+/*////////// Gendar Button Set ////////////*/
+
+.gender_buttons label {
+    display: block !important;
+    margin: 0 !important;
+}
+.gender_buttons button {
+  padding: 4px 10px;
+  margin: 0;
+}
+
+
+/*////////   Custom Checkboxes     ////////*/
+.end_alergy {
+  margin-right: 40px;
+  font-weight: 700;
+}
+.custom_checkbox {
+  display: inline-grid;
+}
+.custom_checkbox label {
+  font-weight: normal; font-family: sans-serif; display: flex; align-items: center; cursor: pointer;
+}
+.custom_checkbox label:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #f2f2f2;
+    border: 1px solid rgba(75, 101, 132, 0.3);
+    display: inline-block;
+    margin-right: 3px;
+    margin-left: 16px;
+}
+.custom_checkbox .vh {
+  position: absolute !important; clip: rect(1px, 1px, 1px, 1px); padding: 0 !important; border: 0 !important; height: 1px !important; width: 1px !important; overflow: hidden;
+}
+.custom_checkbox input[type="checkbox"]:checked ~ label:before {
+  background: #20bf6b no-repeat center; background-size: 12px 12px; 
+  background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQ1LjcwMSA0NS43IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NS43MDEgNDUuNzsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik0yMC42ODcsMzguMzMyYy0yLjA3MiwyLjA3Mi01LjQzNCwyLjA3Mi03LjUwNSwwTDEuNTU0LDI2LjcwNGMtMi4wNzItMi4wNzEtMi4wNzItNS40MzMsMC03LjUwNCAgICBjMi4wNzEtMi4wNzIsNS40MzMtMi4wNzIsNy41MDUsMGw2LjkyOCw2LjkyN2MwLjUyMywwLjUyMiwxLjM3MiwwLjUyMiwxLjg5NiwwTDM2LjY0Miw3LjM2OGMyLjA3MS0yLjA3Miw1LjQzMy0yLjA3Miw3LjUwNSwwICAgIGMwLjk5NSwwLjk5NSwxLjU1NCwyLjM0NSwxLjU1NCwzLjc1MmMwLDEuNDA3LTAuNTU5LDIuNzU3LTEuNTU0LDMuNzUyTDIwLjY4NywzOC4zMzJ6IiBmaWxsPSIjRkZGRkZGIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);
+}
+.custom_checkbox input[type="checkbox"]:focus ~ label {
+  color: #20bf6b;
+} 
+
+
+.result_main {
+  background-image: url(/assets/img/result.jpg);
+  background-size: cover;
+  padding: 3rem;
+  z-index: 1;
+  width: 50%;
+  margin: 0 auto;
+  border: 1px solid #3366cc;
+  position: relative;
+  background-position: center;
+  border-radius: 4px;
+}
+.result_main:before {
+    content: '';
+    background-color: rgb(51 153 255 / 78%);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    content: '';
-    display: block;
     z-index: -1;
 }
-.result_box p {
-  font-size: 16px;
-  font-weight: 400;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+.result_main p {
+    margin-bottom: 6px;
+    color: #fff;
+    font-weight: 400;
 }
-.result_box p span {
-  font-size: 20px;
+.result_main p span {
   font-weight: 700;
+  font-size: 18px;
 }
