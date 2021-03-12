@@ -171,6 +171,16 @@ class CourseController extends Controller
             $weeks = 36;
         }
 
+
+        if(Auth::user()->role_id == 3)
+        {
+            $school = Auth::user()->id;
+        }
+        elseif(Auth::user()->role_id == 4)
+        {
+            $instructor_school = DB::table('instructor_school')->where('i_u_id', Auth::user()->id)->get()->first();
+            $school = $instructor_school->sch_u_id;
+        }
         // $time = \Carbon\Carbon::now()->format('Y-m-d');
         $sdate = $request->sdate;
         $days = $weeks * 7;
@@ -186,7 +196,7 @@ class CourseController extends Controller
 
             'ins_id'=> $ins,
 
-            'user_id'=> Auth::user()->id,
+            'user_id'=> $school,
 
             'room_number'=> $request->rno,
 
