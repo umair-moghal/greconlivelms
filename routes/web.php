@@ -282,7 +282,7 @@ Route::post('/updategrades',  [GradesController::class, 'updategrades']);
 Route::get('/userguide', [UserGuideController::class, 'index']);
 // Route::get('/userguide/create', [UserGuideController::class, 'create']);
 Route::post('/userguide/store', [UserGuideController::class, 'store']);
-Route::get('/userguide/edit/{id}', [UserGuideController::class, 'edit']);
+// Route::get('/userguide/edit/{id}', [UserGuideController::class, 'edit']);
 Route::post('/userguide/update', [UserGuideController::class, 'update']);
 Route::post('/userguide/delete/{id}', [UserGuideController::class, 'destroy']);
 

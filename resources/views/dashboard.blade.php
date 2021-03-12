@@ -62,6 +62,11 @@ $user = Auth::user();
           <?php
             $sub_admins = DB::table('users')->where('role_id', 2)->count();
             $schools = DB::table('school_super')->where('sup_u_id', Auth::user()->id)->count();
+            $sup_schools =DB::table('school_super')->where('sup_u_id', Auth::user()->id)->get()->pluck('sch_u_id')->toArray();
+            $instructors = DB::table('instructor_school')->whereIn('sch_u_id', $sup_schools)->count();
+
+           
+            $courses = DB::table('courses')->whereIn('user_id', $sup_schools)->count();
           ?>
 
           <p class="card-category">Sub Admins</p>
@@ -72,7 +77,7 @@ $user = Auth::user();
 
         </div>
 
-        <div class="card-footer">
+       <!--  <div class="card-footer">
 
           <div class="stats">
 
@@ -80,7 +85,7 @@ $user = Auth::user();
 
           </div>
 
-        </div>
+        </div> -->
 
       </div>
 
@@ -104,7 +109,7 @@ $user = Auth::user();
 
         </div>
 
-        <div class="card-footer">
+        <!-- <div class="card-footer">
 
           <div class="stats">
 
@@ -112,7 +117,7 @@ $user = Auth::user();
 
           </div>
 
-        </div>
+        </div> -->
 
       </div>
 
@@ -130,13 +135,13 @@ $user = Auth::user();
 
           </div>
 
-          <p class="card-category">Schools</p>
+          <p class="card-category">Instructors</p>
 
-          <h3 class="card-title">{{$schools}}</h3>
+          <h3 class="card-title">{{$instructors}}</h3>
 
         </div>
 
-        <div class="card-footer">
+        <!-- <div class="card-footer">
 
           <div class="stats">
 
@@ -144,7 +149,7 @@ $user = Auth::user();
 
           </div>
 
-        </div>
+        </div> -->
 
       </div>
 
@@ -162,13 +167,13 @@ $user = Auth::user();
 
           </div>
 
-          <p class="card-category">Schools</p>
+          <p class="card-category">Courses</p>
 
-          <h3 class="card-title">{{$schools}}</h3>
+          <h3 class="card-title">{{$courses}}</h3>
 
         </div>
 
-        <div class="card-footer">
+        <!-- <div class="card-footer">
 
           <div class="stats">
 
@@ -176,14 +181,255 @@ $user = Auth::user();
 
           </div>
 
-        </div>
+        </div> -->
 
       </div>
 
     </div>
 
   </div>
+@elseif(Auth::user()->role_id == '3')
+  <div class="row z_minus">
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+
+      <div class="card card-stats">
+
+        <div class="card-header card-header-warning card-header-icon">
+
+          <div class="card-icon">
+
+            <i class="graduation_cap"><img src="{{asset('/assets/img/latest/cap.png')}}" alt=""></i>
+
+          </div>
+          <?php
+            $user = Auth::user();
+            $all_courses = DB::table('courses')->where('user_id', $user->id)->count();
+            $instructors = DB::table('instructor_school')->where('sch_u_id', $user->id)->count();
+            $students = DB::table('students')->where('school_id', $user->id)->count();
+            // $no_courses = DB::table('courses')->where('ins_id', $user->id)->get()->count();
+
+            // $instructor_courses = DB::table('courses')->where('ins_id', Auth::user()->id)->get()->pluck('id')->toArray();
+
+            // $students = DB::table('course_students')->whereIn('course_id', $instructor_courses)->get()->pluck('student_id')->unique();
+            
+            // $std_courses = DB::table('course_students')->where('student_id', $user->id)->count();
+            
+          ?>
+
+          <p class="card-category">Courses</p>
+
+          <h3 class="card-title">
+            
+              {{$all_courses}}
+           
+          </h3>
+
+        </div>
+
+       <!--  <div class="card-footer">
+
+          <div class="stats">
+
+            <a href="javascript:;">90% completed</a>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+
+      <div class="card card-stats">
+
+        <div class="card-header card-header-success card-header-icon">
+
+          <div class="card-icon">
+
+            <i class="daily_usr"><img src="{{asset('/assets/img/latest/checking-attendance.png')}}" alt=""></i>
+
+          </div>
+
+          <p class="card-category">Instructors</p>
+
+          <h3 class="card-title">{{$instructors}}</h3>
+
+        </div>
+
+        <!-- <div class="card-footer">
+
+          <div class="stats">
+
+            <a href="#">20% Absent</a>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+
+      <div class="card card-stats">
+
+        <div class="card-header card-header-danger card-header-icon">
+
+          <div class="card-icon">
+
+            <i class="carbon_report"><img src="{{asset('/assets/img/latest/carbon_report.png')}}" alt=""></i>
+
+          </div>
+
+          <p class="card-category">Students</p>
+
+          <h3 class="card-title">{{$students}}</h3>
+
+        </div>
+
+       <!--  <div class="card-footer">
+
+          <div class="stats">
+
+            <a href="#">25% Remaining</a>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </div>
+
+   
+
+  </div>
+@elseif(Auth::user()->role_id == '4')
+  <div class="row z_minus">
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+
+      <div class="card card-stats">
+
+        <div class="card-header card-header-warning card-header-icon">
+
+          <div class="card-icon">
+
+            <i class="graduation_cap"><img src="{{asset('/assets/img/latest/cap.png')}}" alt=""></i>
+
+          </div>
+          <?php
+            $user = Auth::user();
+            $all_courses = DB::table('courses')->where('ins_id', $user->id)->count();
+            // $instructors = DB::table('instructor_school')->where('sch_u_id', $user->id)->count();
+            $students = DB::table('students')->where('school_id', $user->id)->count();
+            // $no_courses = DB::table('courses')->where('ins_id', $user->id)->get()->count();
+
+            // $instructor_courses = DB::table('courses')->where('ins_id', Auth::user()->id)->get()->pluck('id')->toArray();
+
+            // $students = DB::table('course_students')->whereIn('course_id', $instructor_courses)->get()->pluck('student_id')->unique();
+            
+            // $std_courses = DB::table('course_students')->where('student_id', $user->id)->count();
+            
+          ?>
+
+          <p class="card-category">Courses</p>
+
+          <h3 class="card-title">
+            
+              {{$all_courses}}
+           
+          </h3>
+
+        </div>
+
+       <!--  <div class="card-footer">
+
+          <div class="stats">
+
+            <a href="javascript:;">90% completed</a>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+
+      <div class="card card-stats">
+
+        <div class="card-header card-header-success card-header-icon">
+
+          <div class="card-icon">
+
+            <i class="daily_usr"><img src="{{asset('/assets/img/latest/checking-attendance.png')}}" alt=""></i>
+
+          </div>
+
+          <p class="card-category">Students</p>
+
+          <h3 class="card-title">2</h3>
+
+        </div>
+
+        <!-- <div class="card-footer">
+
+          <div class="stats">
+
+            <a href="#">20% Absent</a>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+
+      <div class="card card-stats">
+
+        <div class="card-header card-header-danger card-header-icon">
+
+          <div class="card-icon">
+
+            <i class="carbon_report"><img src="{{asset('/assets/img/latest/carbon_report.png')}}" alt=""></i>
+
+          </div>
+
+          <p class="card-category">Students</p>
+
+          <h3 class="card-title">4</h3>
+
+        </div>
+
+       <!--  <div class="card-footer">
+
+          <div class="stats">
+
+            <a href="#">25% Remaining</a>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </div>
+
+   
+
+  </div>
 @else
+
 
   <div class="row z_minus">
 
@@ -207,18 +453,17 @@ $user = Auth::user();
             $students = DB::table('course_students')->whereIn('course_id', $instructor_courses)->get()->pluck('student_id')->unique();
             
             $std_courses = DB::table('course_students')->where('student_id', $user->id)->count();
-            $all_courses = DB::table('courses')->count();
+            
           ?>
 
           <p class="card-category">Courses</p>
 
           <h3 class="card-title">
-            @if($user->role_id == '4')
-              {{$no_courses}}
-            @elseif($user->role_id == '5') 
+            
+            @if($user->role_id == '5') 
+
               {{$std_courses}}
-            @elseif($user->role_id == '3') 
-              {{$all_courses}}
+        
             @else
             6
             @endif
@@ -480,36 +725,7 @@ $user = Auth::user();
 
           </div>
 
-          @foreach($students as $stdnt)
-
-          <?php
-
-            $std = DB::table('users')->where('id', $stdnt)->get()->first();
-
-          ?>
-            <div class="stu_list">
-                <div class="stu_img">
-
-                  <img src="{{asset('/assets/img/upload/'.$std->image)}}" alt="" width="50" height="50">
-
-                  <div class="stu_text">
-
-                    <h4>{{$std->name}}</h4>
-
-
-                  </div>
-
-                </div>
-
-              <div class="stu_sub">
-
-                <p>Mathematics</p>
-
-
-              </div>
-
-            </div>
-          @endforeach
+          
 
           <!-- <div class="stu_list border-0">
 
