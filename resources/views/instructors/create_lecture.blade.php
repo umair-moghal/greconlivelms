@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+
+
+
 <div id="message">
     @if (Session::has('message'))
         <div class="alert alert-info">
@@ -40,8 +43,26 @@
                       <div class="col-md-6 p_right">
 
                     <div class="custom_input_main select_plugin mobile_field">
+                      <?php   
+                      // dd($course);
+                      $date = $course->start_date;
+                      $weeks = $week-1;
+                      // Create and modify the date.
+                      $dateTime = DateTime::createFromFormat('Y-m-d', $date);
+                      $dateTime->add(DateInterval::createFromDateString($weeks . ' weeks'));
 
-                    <select class="selectpicker" name="day">
+                      
+
+                      $dateTime_max = DateTime::createFromFormat('Y-m-d', $date);
+                      $dateTime_max->add(DateInterval::createFromDateString($weeks+1 . ' weeks'));
+
+
+                      // dd($dateTime->format('Y-m-d'));
+                      ?>
+
+<input type="date" id="date" name="lec_date" required min="{{$dateTime->format('Y-m-d')}}" max="{{$dateTime_max->format('Y-m-d')}}">
+
+                    {{-- <select class="selectpicker" name="day">
 
                         <option value="monday">Monday</option>
                         <option value="tuesday">Tuesday</option>
@@ -49,7 +70,7 @@
                         <option value="thursday">Thursday</option>
                         <option value="friday">Friday</option>
 
-                    </select>
+                    </select> --}}
 
                     <label class="select_lable">Select Day</label>
 
@@ -73,6 +94,50 @@
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+    $(document).ready(
+      function() {
+    
+        //GET THE DATE FROM THE TEXT BOX
+        var placeholder = $("#tbDate").val();
+        //MAKE A DATE FROM THE TEXT BOX VALUE
+        d = new Date(placeholder);
+    
+        //MAKE THE TEXT BOX A DATE PICKER
+        $(".datepicker").datepicker({
+          minDate: x(d), //SET THE MIN ALLOWED DATE FOR YOUR DATE PICKER
+          maxDate: y(d), //SET THE MAX ALLOWED DATE FOR YOUR DATE PICKER
+          numberOfMonths: 2,
+          beforeShowDay: $.datepicker.noWeekends,
+          dateFormat: 'yy-mm-dd'
+        });
+      });
+    
+    //FIND THE DAYS OF WEEK DESIRED FOR THE WEEK OF GIVEN DATE  
+    function x(d) {
+      var date = new Date(d);
+      if (date.getDay() > 0) {
+        date.setDate(date.getDate() - (date.getDay() - 1));
+        return date;
+      } else {
+        return date;
+      }
+    }
+    
+    function y(d){
+      var date = new Date(d);
+      if (date.getDay() < 6) {
+        date.setDate(date.getDate() + ((6 - date.getDay())));
+        return date;
+      } else {
+        return date;
+      }
+    }
+    
+    
+    </script>  
+
 
 <script type="text/javascript">
   setTimeout(function() {

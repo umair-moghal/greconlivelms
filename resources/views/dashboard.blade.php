@@ -67,7 +67,7 @@ $user = Auth::user();
           <p class="card-category">Sub Admins</p>
 
           <h3 class="card-title">
-          {{$sub_admins}} ABC
+          {{$sub_admins}} 
           </h3>
 
         </div>

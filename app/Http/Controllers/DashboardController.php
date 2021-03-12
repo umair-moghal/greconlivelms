@@ -19,21 +19,49 @@ class DashboardController extends Controller
     	// $events = DB::table('calendar_events')->where('type',$type)->get();
         $events = DB::table('calendar_events')->get();
 
+        // dd(Auth::user()->id);
+        //need to make query dinamic
+        $lectures = DB::table('lectures')->where('lec_Date' , '!=' , null)->get();
+        // dd($courses);
+      
+        // echo $newformat;
+        
     	$cal_events = [];
     	foreach($events as $event)
         {
+          
+
 	    		$even = \Calendar::event(
 			    $event->event_name, //event title
 			    true, //full day event?
 			     $event->start_date, //start time (you can also use Carbon instead of DateTime)
 			     $event->end_date, //end time (you can also use Carbon instead of DateTime)
-				 $event->id,  //optionally, you can specify an event ID
+				   $event->id,  //optionally, you can specify an event ID
           [
             'url' => '/calendar'
           ]
 				);
+
     		array_push($cal_events, $even);
     	}
+      // for lectures
+      //ahmad
+      foreach($lectures as $c){
+        $time = strtotime($c->lec_Date);
+          $_date = date('Y-m-d',$time);
+        $even = \Calendar::event(
+			    $c->topic, //event title        topic is lecture topic  
+			    true, //full day event?
+			     $c->lec_Date, //start time (you can also use Carbon instead of DateTime)
+			     $c->lec_Date, //end time (you can also use Carbon instead of DateTime)
+				  //  $event->id,  //optionally, you can specify an event ID
+          [
+            'url' => '/calendar'
+          ]
+				);
+
+    		array_push($cal_events, $even);
+      }
 
     	
     	$calendar = \Calendar::addEvents($cal_events);

@@ -197,6 +197,7 @@ class InstructorsController extends Controller
     public function create_lecture($insid, $cid, $week)
     {
         $course = DB::table('courses')->where('id', $cid)->get()->first();
+        // dd($course);
         $instructor_id = $insid;
         $week = $week;
         return view('instructors.create_lecture', compact('course', 'instructor_id', 'week'));
@@ -297,20 +298,22 @@ class InstructorsController extends Controller
     public function store_lecture(Request $request)
     {
 
+        // dd($request->all());
+
         $this->validate($request, [
           'topic' => 'required|min:3|max:50',
         ]);
         $user = DB::table('instructors')->where('i_u_id', Auth::user()->id)->get()->first();
         // dd($user);
 		
-	    	$zoom = new ZoomController();
-        $meeting = $zoom->create_meeting($user->zoom_id,$request->input('topic'));
+	      $zoom = new ZoomController();
+          $meeting = $zoom->create_meeting($user->zoom_id,$request->input('topic'));
          if($meeting == false){
             Session::flash('message', 'Please activate your ZOOM account to generate meeting, check your mail');
             return redirect()->back();
         }
 		    //$meeting = $zoom->create_meeting('6Upk2QD8S-2l_J9inS9-yA',$request->input('topic'));
-        //echo '<pre>';print_r($meeting);exit;
+            //echo '<pre>';print_r($meeting);exit;
 		      $lecture = DB::table('lectures')->insertGetId([
             'topic' => $request->input('topic'),
             'instructor_id' => $request->input('instructor_id'),
@@ -320,10 +323,10 @@ class InstructorsController extends Controller
             'join_url' => $meeting->join_url,
             'start_url' => $meeting->start_url,
             'course_id' => $request->input('course_id'),
+            'lec_Date' => $request->lec_date,
         ]);
 
            $course_name = DB::table('courses')->where('id',$request->course_id)->pluck('course_name')->first();
-     
            if(isset($request->send_notification)){
             DB::table('activities')->insert([
                 'title' => 'Resource Added Notification',
