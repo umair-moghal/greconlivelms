@@ -10,8 +10,9 @@
         <a href="{{url('/dashboard')}}" class="simple-text logo-normal">
 
           <img src="{{asset('/assets/img/latest/logo.png')}}" alt="" class="img-fluid">
-          <h1> Tst  </h1>
+     
 
+        
         </a>
 
       </div>
