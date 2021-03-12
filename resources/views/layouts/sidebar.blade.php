@@ -1,7 +1,7 @@
 <?php
   $user = Auth::user();
 ?>
-
+  
   <div class="wrapper">
 
     <div class="sidebar"  data-color="purple" data-background-color="white" data-image="{{asset('/assets/img/sidebar-1.jpg')}}">
@@ -10,6 +10,7 @@
         <a href="{{url('/dashboard')}}" class="simple-text logo-normal">
 
           <img src="{{asset('/assets/img/latest/logo.png')}}" alt="" class="img-fluid">
+          <h1> Tst  </h1>
 
         </a>
 
