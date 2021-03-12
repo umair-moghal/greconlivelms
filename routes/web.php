@@ -280,6 +280,11 @@ Route::post('/updategrades',  [GradesController::class, 'updategrades']);
 //User Guide Route
 
 Route::get('/userguide', [UserGuideController::class, 'index']);
+// Route::get('/userguide/create', [UserGuideController::class, 'create']);
+Route::post('/userguide/store', [UserGuideController::class, 'store']);
+Route::get('/userguide/edit/{id}', [UserGuideController::class, 'edit']);
+Route::post('/userguide/update', [UserGuideController::class, 'update']);
+Route::post('/userguide/delete/{id}', [UserGuideController::class, 'destroy']);
 
 //profile
 
@@ -324,7 +329,7 @@ Route::post('/user_session/{id}',function()
 
  //       if($totalDuration >= 15)
  //       {
- //       	DB::table('user_loggings')->orderby('created_at','desc')->where('user_id',Auth::user()->id)->update([
+ //       	DB::table('user_loggings')->orderby('created_at','desc')->where('user_id',Auth::user()->id)->limit(1)->update([
  //            'logout_at' => \Carbon\Carbon::now(),
  //        ]);
  //       	Auth::logout();

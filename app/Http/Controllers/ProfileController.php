@@ -82,7 +82,7 @@ class ProfileController extends Controller
 
     {
 
-
+        // dd($request->file('image'));
     	$user = User::find($id);
 
     	$this->validate($request, [
@@ -91,7 +91,7 @@ class ProfileController extends Controller
 
             'contact' => 'required',
 
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20000',
             
 
         ]);

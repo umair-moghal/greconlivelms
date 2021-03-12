@@ -10,6 +10,19 @@
       <div class="card-header user_guide">
         <div class="user_guide_titl text-center">
           <h3>User Guide</h3>
+          <div class="col-md-3 d-flex align-items-center">
+
+              <div class="p_mob">
+
+                <div class="edit_mob">
+
+                  <a href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus"></i></a>
+
+                </div>
+
+              </div>
+
+          </div>
         </div>
         <div class="ug_boxes">
           <div class="row">
@@ -60,5 +73,110 @@
           </div>
         </div>               	 
       </div>
-  </div>    
+  </div>   
+
+
+
+
+
+
+
+
+
+
+
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+<div class="modal-dialog modal-dialog-centered" role="document">
+
+  <div class="modal-content">
+
+    <div class="cross_modal">
+
+      <div class="modal_title">
+
+        <h3>Add User Guide</h3>
+
+      </div>
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+        <span aria-hidden="true" class="cross_btn">&times;</span>
+
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <form method="POST" action="/userguide/store">
+
+        @csrf
+
+        <!-- <input type="hidden" name="id" value=""> -->
+
+        <div class="col-md-6 p_left">
+
+          <div class="inputfile-box">
+            <input type="file" name="image"   onchange='uploadFile(this)' accept="image/x-png,image/gif,image/jpeg" required="" autofocus="">
+            <label>Image<span class="red">*</span></label>
+            </label>
+          </div>
+        </div>
+          <br><br>
+
+        <div class="custom_input_main">
+            <input type="text" class="form-control" value="{{ old('title')}}" name="sname" required="" minlength="3" maxlength ="50" autofocus="">
+
+            <label>Title<span class="red">*</span></label>
+
+          @error('title')
+
+            <span class="invalid-feedback" role="alert">
+
+            <strong>{{ $message }}</strong>
+
+            </span>
+
+          @enderror
+
+        </div>
+          <br><br>
+
+
+        <div class=" custom_input_main">
+
+          <textarea name="description" cols="8" id="txtEditor" value="{!! old('description') !!}" style="height: 35px;width: 100%;" required="">
+
+          </textarea>
+
+          <label>Enter Description <span class="red">*</span></label>
+
+        </div>
+
+         
+        <div class="s_form_button">
+
+          <a href="{{ url()->previous() }}"><button type="button" class="btn cncl_btn">Cancel</button></a>
+
+          <button type="submit" class="btn save_btn">Save</button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div> 
+
+
+<script>
+
+  CKEDITOR.replace( 'txtEditor' );
+
+</script>
 @endsection

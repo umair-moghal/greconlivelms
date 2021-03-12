@@ -747,6 +747,14 @@ class QuizController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->gw);
+
+        if($request->gw == null)
+        {
+            Session::flash('message', 'There should be atleast one grade wait selected.');
+            return redirect()->back();
+        }
+        
         $quiz = array(
             'quiz_date' => $request->date,
             'negative_marking' => $request->nm,

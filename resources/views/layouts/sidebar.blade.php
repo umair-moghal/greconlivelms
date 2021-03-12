@@ -132,7 +132,7 @@
 
           </li>
 
-          <li class="nav-item {{ Request::is('add_student_sample') ? 'active' : '' }}">
+         <!--  <li class="nav-item {{ Request::is('add_student_sample') ? 'active' : '' }}">
 
             <a class="nav-link" href="{{url('/add_student_sample')}}">
 
@@ -142,7 +142,7 @@
 
             </a>
 
-          </li>
+          </li> -->
           
          
 
@@ -190,7 +190,7 @@
 
           </li>
            <!--pages-->
-         <li class="nav-item dropdown_item   
+         <!-- <li class="nav-item dropdown_item   
          {{(Request::is('aboutpage') || Request::is('contactpage'))? 'active' : '' }}
          ">
 
@@ -214,7 +214,7 @@
 
             </div>
 
-          </li> 
+          </li>  -->
 
           <!-- greetig message -->
 

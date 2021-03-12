@@ -245,11 +245,16 @@
                     <br>
                     <br><br>
 
-
                       <?php
                         $assigned_grade = DB::table('course_assigned_grade_percentages')->where('course_id', $course->id)->get()->all();
                         // dd($assigned_grade);
                       ?>
+                      <div class="col-md-12 ">
+                        <div class="second_heading_scale pl-0">
+                          <p style="font-size:10px;">NOTE: There should be atleast one quiz wait.</p>
+                        </div>
+                      </div>
+
 
                     <div class="col-md-6 p_right">
 
@@ -262,7 +267,16 @@
                         
                     </select>
 
-                    <label class="select_lable">Select Quiz wait</label>
+                    <label class="select_lable">Select Grade wait</label>
+                    @error('gw')
+
+                      <span class="invalid-feedback" role="alert">
+
+                      <strong>{{ $message }}</strong>
+
+                      </span>
+
+                    @enderror
 
                   </div>
 
@@ -275,7 +289,7 @@
 
                   <div class="s_form_button text-center">
 
-                    <a  href="{{url('/course/show_week_details/'. $instructor_id .'/'. $course->id .'/'. $week)}}"><button type="button" class="btn cncl_btn">Cancel</button></a>
+                    <a  href="{{ url()->previous() }}"><button type="button" class="btn cncl_btn">Cancel</button></a>
 
                     <button type="submit" class="btn save_btn">Add</button>
 

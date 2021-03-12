@@ -152,9 +152,28 @@ class userscontroller extends Controller
 
     public function logout(Request $request)
     {
-        DB::table('user_loggings')->orderby('created_at','desc')->where('user_id',Auth::user()->id)->update([
+        $url = url()->previous();
+    // dd($url);
+
+        DB::table('user_loggings')->orderby('created_at','desc')->where('user_id',Auth::user()->id)->limit(1)->update([
+            'last_active_url' => $url,
             'logout_at' => \Carbon\Carbon::now(),
         ]);
+        
+
+        $u = DB::table('user_loggings')->orderby('created_at','desc')->where('user_id', Auth::user()->id)->get()->first();
+
+        $startTime = \Carbon\Carbon::parse($u->login_at);
+        $endTime = \Carbon\Carbon::parse($u->logout_at);
+       
+        $totalDuration = $endTime->diffInMinutes($startTime);
+
+
+        DB::table('user_loggings')->orderby('created_at','desc')->where('user_id',Auth::user()->id)->update([
+            'duration' => $totalDuration,
+        ]);
+
+
     	Auth::logout();
   		return redirect('/');
     }
