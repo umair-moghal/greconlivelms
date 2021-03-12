@@ -10,7 +10,7 @@
         <a href="{{url('/dashboard')}}" class="simple-text logo-normal">
 
           <img src="{{asset('/assets/img/latest/logo.png')}}" alt="" class="img-fluid">
-
+          <h2>popo</h2>
         </a>
 
       </div>
