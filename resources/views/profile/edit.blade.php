@@ -2,6 +2,17 @@
 
 @section('content')
 
+
+<style>
+  .uploadcare--jcrop-holder>div>div, #preview {
+        border-radius: 50%;
+      }
+      .uploadcare--widget__text , .uploadcare--widget {
+        display: none !important;
+      }
+</style>
+
+
 <div class="breadcrumb_main">
 
   <ol class="breadcrumb">
@@ -102,13 +113,26 @@
 
                           <div class="child_image">
 
-                            <img src="{{asset('assets/img/upload/'.$user->image)}}" alt="" id="upfile1">
+                            <!-- <img src="{{asset('assets/img/upload/'.$user->image)}}" alt="" id="upfile1"> -->
+
+                            <script>
+                              UPLOADCARE_PUBLIC_KEY = "demopublickey";
+                            </script>
+                            <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+
+                            <div>
+                              <img src="" alt="" id="preview" width="300" height="300" />
+                            </div>
 
                             <div class="s_edit_pic">
 
-                              <input type="file" id="imgupload" name="image" accept="image/x-png,image/gif,image/jpeg" capture style="display:none"/>
+                              <input type="hidden" 
 
-                              <a id="OpenImgUpload"> <i class="fa fa-pencil"></i> </a>
+                              role="uploadcare-uploader" data-crop="1:1" data-images-only
+
+                               id="imgupload" class="double_click" name="image" accept="image/x-png,image/gif,image/jpeg" capture style="display:none"/>
+
+                              <a id="OpenImgUpload" class="click_to_click"> <i class="fa fa-pencil"></i> </a>
 
                             </div>
 
@@ -344,6 +368,39 @@
 </div>
 
 </div>
+
+<!-- <script>
+  $('.click_to_click').click(function() {
+    $('.uploadcare--widget__button uploadcare--widget__button_type_open').click();
+  });
+
+  $( ".click_to_click" ).on( "click", function() {
+    $( ".uploadcare--widget uploadcare--widget_status_ready" ).trigger( "click" );
+  });
+
+
+</script> -->
+
+<script>
+  $('.click_to_click').click(function(event) {
+    /* Act on the event */
+    $('.uploadcare--widget__button_type_open').trigger('click');
+  });
+</script>
+
+
+<script>
+  // Getting an instance of the widget.
+const widget = uploadcare.Widget('[role=uploadcare-uploader]');
+// Selecting an image to be replaced with the uploaded one.
+const preview = document.getElementById('preview');
+// "onUploadComplete" lets you get file info once it has been uploaded.
+// "cdnUrl" holds a URL of the uploaded file: to replace a preview with.
+widget.onUploadComplete(fileInfo => {
+  preview.src = fileInfo.cdnUrl;
+})
+</script>
+
 
 <script type="text/javascript">
 
