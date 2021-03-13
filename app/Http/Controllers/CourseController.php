@@ -34,8 +34,6 @@ class CourseController extends Controller
 
     {
 
-        
-
           $user = Auth::user()->id;
 
             $assigned_permissions =array();
@@ -98,10 +96,6 @@ class CourseController extends Controller
 
     public function coursestore(Request $request)
     {
-		
-	
-		
-		
 		
          $this->validate($request, [
 
@@ -283,7 +277,6 @@ class CourseController extends Controller
     public function course()
     { 
 
-        
         $user = Auth::user()->id;
          if(auth()->user()->role_id != '5'){
 
@@ -319,7 +312,7 @@ class CourseController extends Controller
          }
 
     	$user = Auth::user();
-
+        
         if(auth()->user()->role_id == '3')
         {
             $courses = DB::table('courses')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get()->all();
@@ -331,6 +324,13 @@ class CourseController extends Controller
             $courses = DB::table('courses')->where('ins_id', Auth::user()->id)->orderBy('id', 'desc')->get()->all();
             return view('courses.index', compact('courses', 'user'));
 
+        }
+
+        elseif(Auth()->user()->role_id == '1' || Auth()->user()->role_id == '2')
+        {
+            dd('asas');
+            $courses = DB::table('courses')->orderBy('id', 'desc')->get()->all();
+            return view('courses.all_courses', compact('courses', 'user'));
 
         }
         

@@ -77,7 +77,7 @@ class Sub_adminsController extends Controller
 
         $sbadmns->name=$request->sa_name;
 
-        $sbadmns->role_id=$request->role;
+        $sbadmns->role_id=2;
 
         $sbadmns->email=$request->email;
 
@@ -167,7 +167,7 @@ class Sub_adminsController extends Controller
 
         $sbadmn->name=$request->sa_name;
 
-        $sbadmn->role_id=$request->role;
+        // $sbadmn->role_id=$request->role;
 
         $sbadmn->email=$request->email;
 

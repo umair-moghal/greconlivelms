@@ -227,15 +227,15 @@ class SchoolsController extends Controller
 
         $udata = new User();
 
-        $udata->name=$request->input('name');
+        $udata->name = $request->input('name');
 
-        $udata->role_id=$request->input('role');
+        $udata->role_id = 3;
 
-        $udata->email=$request->input('email');
+        $udata->email = $request->input('email');
 
-        $udata->contact=$request->input('phno');
+        $udata->contact = $request->input('phno');
 
-        $udata->image=$image;
+        $udata->image = $image;
 
         $udata->password = Hash::make($request['password']);
 
@@ -385,7 +385,7 @@ class SchoolsController extends Controller
 
         if($success){
 
-            Session::flash('message', 'Schodol create successfully');
+            Session::flash('message', 'School create successfully');
 
             return redirect('/schools');
 

@@ -382,11 +382,12 @@
 
                       <div class="custom_input_main select_plugin mobile_field">
 
-                        <select class="selectpicker" name="role">
+                        <!-- <select class="selectpicker" name="role">
 
                           <option value="5">Student</option>
 
-                        </select>
+                        </select> -->
+                        <input type="text" class="form-control" value="Student" name="role" class="mb-4" required="" autofocus="" readonly="readonly">
 
                         <label class="select_lable">Role</label>
 

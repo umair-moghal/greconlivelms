@@ -19,10 +19,9 @@
         <div class="user_guide_titl text-center">
           <h3>User Guide</h3>
           <div class="col-md-3 d-flex align-items-center">
-
-            
-
-                  <a href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus"></i></a>
+            @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+              <a href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus"></i></a>
+            @endif
 
                 
 
@@ -35,9 +34,12 @@
 
                 <div class="col-md-6 p_left">
                   <div class="box_outline">
+                    @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                       <a href="#" data-toggle="modal" data-target="#editguide"><i class="fa fa-pencil"></i></a>
+                    @endif
+
                     <div class="ug_img text-center">
-                      <img src="{{asset('assets/img/upload/'.$guide->image)}}"width="50" height="50" alt="" class="img-fluid">
+                      <img src="{{asset('assets/img/upload/'.$guide->image)}}" width="50" height="50" alt="" class="img-fluid">
                       <!-- <img src="{{asset('/assets/img/latest/guide1.png')}}" alt="" class="img-fluid"> -->
                       <h5>{{$guide->title}}</h5>
                     </div>
@@ -87,7 +89,7 @@
                                 <div class="file_spacing">
 
                                     <input type="file" class="choose" name="image" accept="image/x-png,image/gif,image/jpeg" size="max:255" >
-                                    <img src="{{asset('assets/img/upload/'.$guide->image)}}"width="50" height="50" alt="" class="img-fluid">
+                                    <img src="{{asset('assets/img/upload/'.$guide->image)}}" width="50" height="50" alt="" class="img-fluid" required="">
 
                                      <label>Image<span class="red">*</span></label>
                                 </div>
@@ -154,34 +156,6 @@
                   </div>
 
                 </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
               @endforeach
             @else

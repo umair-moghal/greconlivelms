@@ -512,7 +512,7 @@ class StudentsController extends Controller
 
         $udata->name=$request->input('sname');
 
-        $udata->role_id=$request->input('role');
+        $udata->role_id=5;
 
         $udata->email=$request->input('email');
 

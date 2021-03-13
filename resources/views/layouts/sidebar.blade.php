@@ -137,6 +137,7 @@
          
          
 
+          @if($user->role_id == '1')
           <li class="nav-item dropdown_item  
 
           {{(Request::is('subadmin/show') || Request::is('Sub_admin/create'))? 'active' : '' }}
@@ -156,17 +157,16 @@
 
                 <a class="collapse-item {{ Request::is('subadmin/show') ? 'active_multidropdown' : '' }}" href="{{url('/subadmin/show')}}">All Sub Admin</a>
 
-                @if($user->role_id == '1')
 
                   <a class="collapse-item {{ Request::is('Sub_admin/create') ? 'active_multidropdown' : '' }}" href="{{url('/Sub_admin/create')}}">Add New Sub Admin</a>
 
-                @endif
 
               </div>
 
             </div>
 
           </li>
+          @endif
 
          <!--settings-->
           <li class="nav-item   {{ Request::is('setting') ? 'active' : '' }}">

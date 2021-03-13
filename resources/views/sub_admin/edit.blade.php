@@ -108,7 +108,7 @@
 
                     <div class="custom_input_main mobile_field">
 
-                        <input type="tell" class="form-control" name="contact" value="{{ old('contact', $sbadmn->contact)}}" placeholder="xxxx-xxxxxxx" pattern="03[0-9]{2}-(?!1234567)(?!1111111)(?!7654321)[0-9]{7}" required="" minlength="12" maxlength = "12" autofocus="">
+                        <input type="tell" class="form-control" name="contact" value="{{ old('contact', $sbadmn->contact)}}"  required="" minlength="12" maxlength = "12" autofocus="">
 
                         <label>Contact<span class="red">*</span></label>
 
@@ -174,12 +174,13 @@
 
                       <div class="custom_input_main select_plugin mobile_field">
 
-                        <select class="selectpicker" name="role">
+                        <!-- <select class="selectpicker" name="role">
 
                           <option value="2">Sub Admin</option>
 
-                        </select>
+                        </select> -->
 
+                        <input type="text" class="form-control" value="Sub Admin" name="role" class="mb-4" required="" autofocus="" readonly="readonly">
                         <label class="select_lable">Role</label>
 
                       </div>
@@ -214,7 +215,7 @@
 
                       <a  href="{{url('/subadmin/show')}}"><button type="button" class="btn cncl_btn">Cancel</button></a>
 
-                      <button type="submit" class="btn save_btn">Save</button>
+                      <button type="submit" class="btn save_btn">Update</button>
 
                     </div>
 

@@ -127,6 +127,7 @@ class DashboardController extends Controller
     // 5 is for direct results of students
     
     $notifications1 = DB::table('activities')->where('message_reciever', auth()->user()->id)->where('activity_for',4)->orderby('created_at','desc')->get();
+    // dd($notifications1);
 
       $notifications2 = DB::table('activities')->where('activity_for',3)->orderby('id','desc')->get();
 
@@ -139,14 +140,14 @@ class DashboardController extends Controller
 
         $notifications3 = $notifications3->merge($notifications4);
         $notifications3 = $notifications3->merge($notifications2);
-      $notifications = $notifications3->merge($notifications1);
+        $notifications = $notifications3->merge($notifications1);
       }elseif(auth()->user()->role_id == 4){
         $notifications = $notifications1->merge($notifications2);
       }elseif(auth()->user()->role_id == 3){
          $notifications3 = DB::table('activities')->where('activity_for',3)->orderby('created_at','desc')->get();
 
         $notifications3 = $notifications3->merge($notifications2);
-      $notifications = $notifications3->merge($notifications1);
+        $notifications = $notifications3->merge($notifications1);
         
       }else{
         $notifications = $notifications1->merge($notifications2);
@@ -158,7 +159,7 @@ class DashboardController extends Controller
 
          // $notifications = DB::table('notifications')->where('school_id',$school_id)->orWhere('school_id',0)->orderBy('id','desc')->count();
 
-         $data = $notifications - $skipper;
+        $data = $notifications - $skipper;
          if($data < 0){
           $data = 0;
          }

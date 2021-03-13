@@ -68,7 +68,7 @@
                   <div class="col-md-6">
                     <div class="custom_input_main mobile_field">
                       <input type="email" class="form-control" name="email"value="{{old('email',$student->email)}}"  required maxlength="255" readonly autofocus="">
-                      <label>Email1<span class="red">*</span></label>
+                      <label>Email<span class="red">*</span></label>
                     </div>
                     @error('email')
                       <span class="invalid-feedback" role="alert">
@@ -234,9 +234,11 @@
                         
                   <div class="col-md-6">
                     <div class="custom_input_main mobile_field">
-                      <select required="required" class="form-control" name="role">
+                      <!-- <select required="required" class="form-control" name="role">
                           <option value="5">Student</option>
-                      </select>
+                      </select> -->
+
+                      <input type="text" class="form-control" value="Student" name="role" class="mb-4" required="" autofocus="" readonly="readonly">
                       <label>Role<span class="red">*</span></label>
                     </div>
                   </div>

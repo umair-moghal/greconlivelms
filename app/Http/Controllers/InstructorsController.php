@@ -425,7 +425,7 @@ class InstructorsController extends Controller
 
         $udata->name=$request->input('name');
 
-        $udata->role_id=$request->input('role');
+        $udata->role_id=4;
 
         $udata->email=$request->input('email');
 

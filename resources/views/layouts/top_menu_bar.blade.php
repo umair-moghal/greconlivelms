@@ -69,9 +69,9 @@ $greeting = DB::table('greetings')->get()->first();
         <div class="top_menu_link @if(Request::segment(1) == 'course')  active_link arrow_box @endif ">
 
           @if(auth()->user()->role_id == 5)
-          <a href="{{url('/studentcourses')}}">Courses</a>
+            <a href="{{url('/studentcourses')}}">Courses</a>
           @else
-          <a href="{{url('/course')}}">Courses</a>
+            <a href="{{url('/course')}}">Courses</a>
           @endif
 
         </div>
@@ -79,7 +79,6 @@ $greeting = DB::table('greetings')->get()->first();
       </div>
 
       
-
       <div class="col-md-2">
 
         <div class="top_menu_link @if(Request::segment(1) == '#')  active_link arrow_box @endif">
@@ -116,7 +115,7 @@ $greeting = DB::table('greetings')->get()->first();
 
             <li class="nav-item">
 
-              <a class="nav-link" href="/messages">
+              <a class="nav-link" href="{{url('/messages')}}">
 
                 <i class="fa fa-envelope"></i>
 
