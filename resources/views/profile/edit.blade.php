@@ -121,7 +121,7 @@
                             <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
 
                             <div>
-                              <img src="" alt="" id="preview" width="300" height="300" />
+                              <img src="{{asset('assets/img/upload/'.$user->image)}}" alt="" id="preview" width="300" height="300" />
                             </div>
 
                             <div class="s_edit_pic">
@@ -390,7 +390,7 @@
 
 
 <script>
-  // Getting an instance of the widget.
+// Getting an instance of the widget.
 const widget = uploadcare.Widget('[role=uploadcare-uploader]');
 // Selecting an image to be replaced with the uploaded one.
 const preview = document.getElementById('preview');
@@ -398,6 +398,24 @@ const preview = document.getElementById('preview');
 // "cdnUrl" holds a URL of the uploaded file: to replace a preview with.
 widget.onUploadComplete(fileInfo => {
   preview.src = fileInfo.cdnUrl;
+  // alert(fileInfo.cdnUrl);
+
+  const toDataURL = url => fetch(url)
+  .then(response => response.blob())
+  .then(blob => new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onloadend = () => resolve(reader.result)
+    reader.onerror = reject
+    reader.readAsDataURL(blob)
+  }))
+
+
+toDataURL(fileInfo.cdnUrl)
+  .then(dataUrl => {
+    // console.log(dataUrl)
+    preview.src = dataUrl
+  })
+
 })
 </script>
 
@@ -424,7 +442,8 @@ widget.onUploadComplete(fileInfo => {
             var reader = new FileReader();
             
             reader.onload = function (e) {
-                $('#upfile1').attr('src', e.target.result);
+                $('#preview').attr('src', e.target.result);
+                // $('#upfile1').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
