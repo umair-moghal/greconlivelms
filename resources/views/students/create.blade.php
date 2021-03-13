@@ -305,13 +305,13 @@
 
                   <div class="col-md-6 ">
 
-                    <div class="custom_input_main mobile_field">
+                    <div class="custom_input_main select_plugin alergy">
 
-                      <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg" required="" autofocus="">
+                      <input type="text" class="form-control" value="{{ old('alergy')}}" name="alergy" class="mb-4" minlength="1" maxlength ="255" autofocus="">
 
-                      <label>Image<span class="red">*</span></label>
+                        <label class="select_lable">Enter Allergies(If any )</label>
 
-                    </div>
+                      </div>
 
                   </div>
 
@@ -461,18 +461,7 @@
 
 					
 					
-					
-					<div class="col-md-12">
 
-                      <div class="custom_input_main select_plugin alergy">
-
-                      <input type="text" class="form-control" value="{{ old('alergy')}}" name="alergy" class="mb-4" minlength="1" maxlength ="255" autofocus="">
-
-                        <label class="select_lable">Enter Allergies(If any )</label>
-
-                      </div>
-
-                  </div>
 				  
 				  
 				  
@@ -805,6 +794,15 @@
                 
 
           </div> -->
+
+
+          <div class="custom_input_main mobile_field">
+
+                      <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg" required="" autofocus="">
+
+                      <label>Image<span class="red">*</span></label>
+
+                    </div>
 
           <br><br>
 
